@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping List</title>
+    <style>
+        body { font-family: Arial; padding: 2em; }
+        input[type=text] { padding: 0.5em; }
+        button { padding: 0.5em; margin-left: 0.5em; }
+        ul { list-style: none; padding: 0; }
+        li { margin: 0.5em 0; }
+    </style>
+</head>
+<body>
+    <h1>Shopping List</h1>
+    <form action="/add" method="post">
+        <input type="text" name="item" required />
+        <button type="submit">Add</button>
+    </form>
+    <ul>
+        <th:block th:each="item, iterStat : ${items}">
+            <li>
+                <form action="/delete" method="post" style="display:inline;">
+                    <input type="hidden" name="index" th:value="${iterStat.index}" />
+                    <button type="submit">❌</button>
+                </form>
+                <span th:text="${item}"></span>
+            </li>
+        </th:block>
+    </ul>
+</body>
+</html>
